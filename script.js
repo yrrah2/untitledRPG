@@ -46,11 +46,14 @@ var justSomeNumber = 0;
 
 // Define the work to be done
 var tick = () => {
-if (this.resourceType == "logs"){
+	if (ticker.resourceType == "logs"){
 		logs += 1
-	}else{
+		}else {
 		ores += 1
 	}
+
+	$("#show-logs").text(logs)
+	$("#show-ores").text(ores)
 };
 
 // Define what to do if something goes wrong
@@ -63,9 +66,13 @@ var ticker = new AdjustingInterval(tick, 1000, doError);
 
 collect_resources = () => {}
 
-start_collecting = () => {
-	ticker.start();	
-}
+ticker.start();
+
 stop_collecting = () => {
 	ticker.stop();	
 }
+
+$(document).ready(() => {
+$("#logs-button").click(() => ticker.setResourceType("logs"));
+$("#ores-button").click(() => ticker.setResourceType("ores"));
+})
